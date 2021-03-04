@@ -27,18 +27,12 @@ public class AccountService {
     }
 
     public Account openNewCurrentAccount(Long customerId, BigDecimal initialCredit) {
-        Optional<Customer> customer = customerRepository.findById(customerId);
-        if (customer.isPresent()) {
-            Account account = new Account(
-                    generateUniqueAccountNumber(),
-                    BigDecimal.ZERO,
-                    CURRENT,
-                    LocalDateTime.now(),
-                    customer.get());
-            return accountRepository.saveAndFlush(account);
-        } else {
-            throw new EntityNotFoundException("Customer with id " + customerId + " was not found.");
-        }
+        return new Account(
+                generateUniqueAccountNumber(),
+                BigDecimal.ZERO,
+                CURRENT,
+                LocalDateTime.now(),
+                customerRepository.getOne(customerId));
     }
 
     private String generateUniqueAccountNumber() {
