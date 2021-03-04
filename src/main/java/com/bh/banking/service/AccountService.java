@@ -4,12 +4,13 @@ import com.bh.banking.entity.Account;
 import com.bh.banking.entity.Customer;
 import com.bh.banking.repository.AccountRepository;
 import com.bh.banking.repository.CustomerRepository;
+
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -27,12 +28,16 @@ public class AccountService {
     }
 
     public Account openNewCurrentAccount(Long customerId, BigDecimal initialCredit) {
-        return new Account(
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new EntityNotFoundException("Customer was not found for ID: " + customerId));
+        Account account = new Account(
                 generateUniqueAccountNumber(),
                 BigDecimal.ZERO,
                 CURRENT,
                 LocalDateTime.now(),
-                customerRepository.getOne(customerId));
+                customer);
+
+        return accountRepository.saveAndFlush(account);
     }
 
     private String generateUniqueAccountNumber() {
