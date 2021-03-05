@@ -31,6 +31,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
     protected ResponseEntity<ApiError> handleEntityNotFoundException(EntityNotFoundException ex) {
+        log.error(ex.getMessage());
+
         ApiError apiError = new ApiError(HttpStatus.NOT_FOUND);
         apiError.setMessage(ex.getMessage());
         return buildResponseEntity(apiError);
@@ -38,6 +40,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
     protected ResponseEntity<ApiError> handleIllegalArgumentException(IllegalArgumentException ex) {
+        log.error(ex.getMessage());
+
         ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
         apiError.setMessage(ex.getMessage());
         return buildResponseEntity(apiError);

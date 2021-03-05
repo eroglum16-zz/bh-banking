@@ -17,9 +17,11 @@ public class RandomAccountNumberGenerator implements AccountNumberGenerator {
     @Override
     public String generateUniqueAccountNumber() {
         StringBuilder accountNumber = new StringBuilder();
+        // Concatenate random numbers (0-9) to form an account number
         for (int i = 0; i < ACCOUNT_NUMBER_LENGTH; i++) {
             accountNumber.append(rand.nextInt(RANDOM_UPPER_BOUND));
         }
+        // If the generated account number is in use, try again recursively
         if (accountRepository.existsByAccountNumber(accountNumber.toString())) {
             return generateUniqueAccountNumber();
         }
