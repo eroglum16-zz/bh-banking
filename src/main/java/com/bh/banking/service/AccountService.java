@@ -47,12 +47,12 @@ public class AccountService {
                 LocalDateTime.now(),
                 customer);
 
-        account = accountRepository.saveAndFlush(account);
-        if (initialCredit.compareTo(BigDecimal.ZERO) > 0) {
+        if (initialCredit != null && initialCredit.compareTo(BigDecimal.ZERO) > 0) {
             account = transactionService.sendTransactionToAccount(account, initialCredit, initialCreditTransactionMessage);
+        } else {
+            account = accountRepository.saveAndFlush(account);
         }
         log.info("A new account created: {}", account);
-
         return account;
     }
 }
