@@ -22,7 +22,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<ApiError> logError(Exception ex){
-        log.error(ex.getMessage());
+        log.error(ex.getMessage(), ex);
 
         ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR);
         apiError.setMessage(ex.getMessage());

@@ -17,5 +17,5 @@ public class AccountDto {
 
     private LocalDateTime createdAt;
 
-    private CustomerDto owner;
+    private Long ownerId;
 }
