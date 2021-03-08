@@ -6,7 +6,6 @@ import com.bh.banking.entity.Account;
 import com.bh.banking.mapper.AccountMapper;
 import com.bh.banking.service.AccountService;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Slf4j
 @RestController
 @RequestMapping(AccountController.BASE_URL)
 public class AccountController {
@@ -31,7 +29,6 @@ public class AccountController {
     public ResponseEntity<AccountDto> createNewAccount(@RequestBody CreateAccountDto createAccountDto) {
         Account account = accountService.openNewCurrentAccount(createAccountDto.getCustomerId(),
                 createAccountDto.getInitialCredit());
-        log.info("A new account created: {}", account);
 
         return new ResponseEntity<>(AccountMapper.INSTANCE.toAccountDto(account), HttpStatus.CREATED);
     }
