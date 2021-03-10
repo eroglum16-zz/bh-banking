@@ -3,10 +3,8 @@ package com.bh.banking.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,4 +21,7 @@ public class Customer {
     private String email;
 
     private String phone;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Account> accounts;
 }

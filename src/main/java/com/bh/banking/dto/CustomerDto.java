@@ -2,6 +2,9 @@ package com.bh.banking.dto;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class CustomerDto {
     private Long customerId;
@@ -13,4 +16,6 @@ public class CustomerDto {
     private String email;
 
     private String phone;
+
+    private List<AccountDto> accounts = new ArrayList<>();
 }
