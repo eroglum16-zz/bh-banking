@@ -2,6 +2,7 @@ package com.bh.banking.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,6 +19,7 @@ public class Customer {
 
     private String surname;
 
+    @NaturalId
     private String email;
 
     private String phone;
